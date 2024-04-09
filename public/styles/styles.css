@@ -1,0 +1,215 @@
+@import "nib";
+
+.p{
+  color: red;
+}
+
+#auto-filterbox li{
+  /* position : relative; */
+  display: none;
+  font-size: 12px;
+  cursor: pointer;
+
+}
+
+#searchbar.active #auto-filterbox li{
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.boxcontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 50px;
+}
+
+h1 {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 5% 0;
+  padding: 0.5em;
+  margin: 0 0 5% 0;
+}
+
+.cardBox {
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 1.2em;
+  margin: 1% 0 0 1%;
+  perspective: 900px;
+  transition: all 0.3s ease 0s;
+  width: 23.7%;
+}
+
+/* .cardBox:hover .card {
+  transform: rotateY( 180deg);
+} */
+
+.card {
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+  cursor: default;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease 0s;
+  width: 100%;
+  -webkit-animation: giro 1s 1;
+  animation: giro 1s 1;
+}
+
+.card p {
+  margin-bottom: 1.8em;
+}
+
+.card .front,
+.card .back {
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  color: white;
+  height: auto;
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 0.8em;
+  position: absolute;
+  width: 100%;
+}
+
+.card .front strong {
+  background: #fff;
+  border-radius: 100%;
+  color: #222;
+  font-size: 1.5em;
+  line-height: 30px;
+  padding: 0 7px 4px 6px;
+}
+
+.card .back {
+  transform: rotateY( 180deg);
+}
+
+.card .back a {
+  padding: 0.3em 0.5em;
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1px;
+  font-size: 0.9em;
+  transition: all 0.2s ease 0s;
+}
+
+.card .back a:hover {
+  text-shadow: 0 0 1px #333;
+}
+
+.cardBox:nth-child(2) .card {
+  -webkit-animation: giro 1.5s 1;
+  animation: giro 1.5s 1;
+}
+
+.cardBox:nth-child(3) .card {
+  -webkit-animation: giro 2s 1;
+  animation: giro 2s 1;
+}
+
+.cardBox:nth-child(4) .card {
+  -webkit-animation: giro 2.5s 1;
+  animation: giro 2.5s 1;
+}
+
+@-webkit-keyframes giro {
+  from {
+    transform: rotateY( 180deg);
+  }
+  to {
+    transform: rotateY( 0deg);
+  }
+}
+
+@keyframes giro {
+  from {
+    transform: rotateY( 180deg);
+  }
+  to {
+    transform: rotateY( 0deg);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cardBox {
+    margin-left: 2.8%;
+    margin-top: 3%;
+    width: 46%;
+  }
+  .card {
+    height: 285px;
+  }
+  .cardBox:last-child {
+    margin-bottom: 3%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cardBox {
+    width: 94.5%;
+  }
+  .card {
+    height: 260px;
+  }
+}
+
+/* ul li{
+  display: inline;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);;
+  border-radius: 10px;
+  border: 1px solid #161D6f;
+  transition: 0.5s linear;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 12px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+ul li span{
+  margin-left: 10px;
+} */
+
+#container1 ul {
+  margin-left: 10px;
+}
+
+#homesearch{
+  
+    width: 250px;
+    height: 40px;
+    padding: 3px;
+    border: 1px solid #DDE1E4;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  right: 0px;
+  top: 65px;
+}

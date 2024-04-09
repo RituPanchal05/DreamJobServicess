@@ -1,0 +1,31 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Dream Job Service",
+  "main": "server.js",
+  "scripts": {
+    "build:css": "postcss public/styles/tailwind.css -o public/styles/style.css"
+  },
+  "author": "DJS",
+  "license": "ISC",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "autoprefixer": "^10.4.2",
+    "body-parser": "^1.19.1",
+    "cloudinary": "^1.29.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-delay": "^0.2.0",
+    "express-flash": "^0.0.2",
+    "hbs": "^4.1.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.4",
+    "multer": "^1.4.4",
+    "nodemon": "^2.0.13",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.0.1",
+    "tailwindcss": "^3.0.15"
+  }
+}

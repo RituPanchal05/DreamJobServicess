@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <%- include('../components/headLinks.ejs'); %>
+
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss-colors-css-variables" />
+    <script src="tailwind.config.js">
+    </script>
+    <link href="../styles/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+        ul li {
+            display: inline;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+            ;
+            border-radius: 10px;
+            border: 1px solid #161D6f;
+            transition: 0.5s linear;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            font-size: 12px;
+            padding: 5px;
+            padding-left: 15px;
+            padding-right: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        ul li span {
+            margin-left: 10px;
+        }
+
+       
+        .b {
+            border-radius: 50%;
+            height: 200px;
+        }
+
+        .imgs label {
+            cursor: pointer;
+        }
+
+        .imgs label input {
+            display: none;
+        }
+
+        .imgs label span {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            transition: transform 0.4s;
+        }
+
+        .imgs label span i {
+            position: absolute;
+            font-size: 25px;
+        }
+
+        .imgs label span:hover {
+            transform: scale(0.8);
+
+        }
+
+        .upload-button {
+            position: relative;
+            background-color: aliceblue;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            left: 70%;
+            width: 170px;
+            top: -30px;
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-gray-100">
+    <!-- header -->
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border-b-2 border-gray-100 shadow-xl z-10"
+        data-aos="fade-down">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl px-4 py-2 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="px-4 py-2 flex flex-row items-center justify-evenly">
+                <img src="../logo_dark.png" alt="" class="w-28 h-8">
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{'flex': open, 'hidden': !open}"
+                class="flex-col text-center flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:shadow-outline hover:bg-lightgreen focus:bg-lightgreen"
+                    href="../">Job Application</a>
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hfocus:outline-none focus:shadow-outline hover:bg-lightgreen focus:bg-lightgreen"
+                    href="myPost">My Post</a>
+                
+                <div @click.away="open = false" class="relative z-10 " x-data="{ open: false }">
+                    <button @click="open = !open"
+                        class=" flex flex-row items-center w-full px-2 py-2 mt-2 h- 1 text-sm font-semibold text-center bg-transparent rounded-3xl dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 focus:bg-lightgreen focus:outline-none focus:shadow-outline hover:bg-lightgreen">
+                        <span>
+                            <svg width="25" height="25" viewBox="0 0 35 35" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                    fill="#161D6F" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute -left-14 right-0 w-72 mt-2 origin-center rounded-md shadow-lg md:w-48">
+                        <div class="px-2 py-2 bg-white rounded-md shadow">
+                            <div @click.away="open = false" class="relative" x-data="{ open: false } ">
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 35 35" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                                fill="#161D6F" />
+                                        </svg>
+                                    </span>
+                                    <a href="profile"><span class="text-xs">Profile</span></a>
+                                </button>
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M5 3H11C11.7956 3 12.5587 3.31607 13.1213 3.87868C13.6839 4.44129 14 5.20435 14 6V10H13V6C13 5.46957 12.7893 4.96086 12.4142 4.58579C12.0391 4.21071 11.5304 4 11 4H5C4.46957 4 3.96086 4.21071 3.58579 4.58579C3.21071 4.96086 3 5.46957 3 6V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H11C11.5304 21 12.0391 20.7893 12.4142 20.4142C12.7893 20.0391 13 19.5304 13 19V15H14V19C14 19.7956 13.6839 20.5587 13.1213 21.1213C12.5587 21.6839 11.7956 22 11 22H5C4.20435 22 3.44129 21.6839 2.87868 21.1213C2.31607 20.5587 2 19.7956 2 19V6C2 5.20435 2.31607 4.44129 2.87868 3.87868C3.44129 3.31607 4.20435 3 5 3ZM8 12H19.25L16 8.75L16.664 8L21.164 12.5L16.664 17L16 16.25L19.25 13H8V12Z"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <a href="logout"><span class="text-xs">Sign Out</span></a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- content -->
+
+    <div class="flex flex-col items-center justify-center mb-10 w-full ">
+
+        <form method="post" action="profile" enctype="multipart/form-data">
+
+            <div
+                class="flex flex-row justify-between w-[45rem] p-7 h-auto text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border-b-2 border-gray-100 rounded mt-20">
+                <div class="relative inline-block">
+                    <div class="relative inline-block imgs">
+
+                        <img src="<%= title.dpImg.avatar %>" class="b" width="200" />
+                        <label class="upload-area">
+                            <input type="file" name="image"/>
+                            <span class="upload-button">
+                              <i class="fas fa-camera"></i>
+                            </span>
+                          </label>
+                        <!-- <input type="file" name="image"/>  -->
+                    </div>
+                </div>
+                <div class="flex flex-col mt-4 items-start h-full w-3/5 ">
+                    <input type="hidden" name="typeOfInput" value="info" required />
+                    <div class="flex flex-row justify-between w-full">
+                        <input class="text-midnight text-lg border-0 outline-none w-full" name="companyName"
+                            placeholder="Type your company name..." value="<%= title.companyName %>" required />
+
+                        <button type="submit" name="description"
+                            class="px-4 border-2 border-midnight rounded bg-lightgreen text-xs shadow-2xl ml-2">Edit</button>
+                    </div>
+                    <div class="w-full mt-2 text-xs">
+
+                        <textarea name="description" id="description1" cols="66" rows="5"
+                            class="border p-2 rounded-md border-solid border-gray-300" style="resize:none; outline:none"
+                            placeholder="Type your company description..." oninput="countChars()"
+                            required><%= title.companyDescription %></textarea>
+
+                    </div>
+                    <div class="small-msg text-xs text-red-600" style="display: none;">
+                        Atmost 300 words allowed (including space)
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <form action="profile" method="post">
+
+            <div
+                class="w-[45rem] h-auto p-7 mt-2 text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border-b-2 border-gray-100 rounded">
+                <div class="flex flex-row justify-between">
+                    <span class="text-2xl text-midnight">More About My Company...</span>
+                    <button class="px-4 border-2 border-midnight rounded bg-lightgreen text-xs shadow-2xl"
+                        type="submit">Edit</button>
+                </div>
+                <div class="text-xs">
+                    <div class="flex flex-row justify-between mt-6">
+                        <input type="hidden" name="typeOfInput" value="moreaboutmycompany" />
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Email</span>
+                            <div class="leading-none">
+                                <p class="placeholder-blue p-0 outline-0 text-gray-500 text-right">
+                                    <%= title.email != undefined ? title.email : '' %></p>
+                            </div>
+                        </label>
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Company Owner</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue  p-0 outline-0 text-gray-500 text-right" name="owner"
+                                    placeholder="A.R.Shah" value="<%= title.name != undefined ? title.name : '' %>"
+                                    required />
+                            </div>
+                        </label>
+                    </div>
+                    <div class="flex flex-row justify-between mt-4">
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Contact</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="contact"
+                                    placeholder="1234567890"
+                                    value="<%= title.contactNo != undefined ? title.contactNo : '' %>" required />
+                            </div>
+                        </label>
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Employee</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="employee"
+                                    placeholder="115+" value="<%= title.empStaff != undefined ? title.empStaff : '' %>"
+                                    max="1000" required />
+                            </div>
+                        </label>
+                    </div>
+                    <div class="flex flex-row justify-between mt-4">
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">My Website URL</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="websiteurl"
+                                    placeholder="mysite.com"
+                                    value="<%= title.websiteUrl != undefined ? title.websiteUrl : '' %>" required />
+                            </div>
+                        </label>
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Social media URL</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right"
+                                    name="socialmediaurl" placeholder="http://linkdin.com.12345"
+                                    value="<%= title.socialMediaUrl != undefined ? title.socialMediaUrl : '' %>"
+                                    required />
+                            </div>
+                        </label>
+                    </div>
+                    <div class="flex flex-row justify-between mt-4">
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Established Year</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right"
+                                    name="establishedyear" value="" required />
+                                <span><%= title.establishedYear != undefined ? title.establishedYear : '' %></span>
+                            </div>
+                        </label>
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[44rem]">
+                            <span class="flex text-gray-500 select-none leading-none">date</span>
+                            <div class="leading-none">
+                                <input id="handle" type="date"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="regiDate"
+                                    placeholder="dd-mm-yyyy"
+                                    value="<%= title.regiDate != undefined ? title.regiDate : '' %>"
+                                    required />
+                            </div>
+                        </label>
+                    </div>
+                    <div class="flex flex-row justify-between mt-4">
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Work place</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="workplace"
+                                    placeholder="606, abc complex"
+                                    value="<%= title.address.workPlace != undefined ? title.address.workPlace: '' %>"
+                                    required />
+                            </div>
+                        </label>
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Area</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="area"
+                                    placeholder="vastral"
+                                    value="<%= title.address.area != undefined ? title.address.area: '' %>" required />
+                            </div>
+                        </label>
+                    </div>
+                    <div class="flex flex-row justify-between mt-4">
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">City</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="city"
+                                    placeholder="Ahmedabad"
+                                    value="<%= title.address.city != undefined ? title.address.city : '' %>" required />
+                            </div>
+                        </label>
+                        <label
+                            class="input-field inline-flex justify-between items-baseline border border-gray-300 bg-white px-2 py-2 rounded w-[20rem]">
+                            <span class="flex text-gray-500 select-none leading-none">Zip code</span>
+                            <div class="leading-none">
+                                <input id="handle" type="text"
+                                    class="placeholder-blue p-0 outline-0 text-gray-500 text-right" name="zip"
+                                    placeholder="123456"
+                                    value="<%= title.address.zipCode != undefined ? title.address.zipCode: '' %>"
+                                    required max="6" min="4" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        </form>
+
+        <!-- global var -->
+        <% var arr = title.technologies %>
+
+        <form action="profile" method="post">
+
+            <div
+                class="w-[45rem] h-auto p-7 mt-2 text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border border-gray-100 rounded">
+                <div class="flex flex-row justify-between">
+                    <span class="text-2xl text-midnight"> Technologies... </span>
+                    <button class="px-4 border-2 border-midnight rounded bg-lightgreen text-xs shadow-2xl"
+                        type="submit">Edit</button>
+                </div>
+
+                <div class="technology-list flex flex-row flex-wrap justify-start items-start">
+
+                    <div class="mobile flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Mobile development</p>
+                        <input type="hidden" name="typeOfInput" value="tech" />
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="android" name="tech" value="Android"
+                                    <% if(arr.includes('Android')){ %>checked <% } %> />
+                                <label for="android">Android</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="java" value="Java"
+                                    <% if(arr.includes('java')){ %>checked <% } %> />
+                                <label for="java">Java</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="kotlin" value="Kotlin"
+                                    <% if(arr.includes('Kotlin')){ %>checked <% } %> />
+                                <label for="kotlin">Kotlin</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="swift" value="Swift"
+                                    <% if(arr.includes('Swift')){ %>checked <% } %> />
+                                <label for="swift">Swift</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="flutter" value="Flutter"
+                                    <% if(arr.includes('Flutter')){ %>checked <% } %> />
+                                <label for="flutter">Flutter</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="reactnative" value="React Native"
+                                    <% if(arr.includes('React Native')){ %>checked <% } %> />
+                                <label for="reactnative">React Native</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="ionic" value="Ionic"
+                                    <% if(arr.includes('Ionic')){ %>checked <% } %> />
+                                <label for="ionic">Ionic</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="objective-c" value="Objectie-C"
+                                    <% if(arr.includes('Objectie-C')){ %>checked <% } %> />
+                                <label for="objective-c">Objectie-C</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="frontend flex flex-col items-start justify-center p-2 mt-2 w-52 ">
+                        <p class="text-base text-gray-600 mb-2">Frontend development</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="html" name="tech" value="HTML"
+                                    <% if(arr.includes('HTML')){ %>checked <% } %> />
+                                <label for="html">HTML</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="css" value="CSS"
+                                    <% if(arr.includes('CSS')){ %>checked <% } %> />
+                                <label for="css">CSS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="angular" value="Angular JS"
+                                    <% if(arr.includes('Angular JS')){ %>checked <% } %> />
+                                <label for="angular">Angular JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="vue" value="Vue JS"
+                                    <% if(arr.includes('Vue JS')){ %>checked <% } %> />
+                                <label for="vue">Vue JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="jquery" value="jQuery"
+                                    <% if(arr.includes('jQuery')){ %>checked <% } %> />
+                                <label for="jquery">jQuery</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="vb.net" value="VB.NET"
+                                    <% if(arr.includes('VB.NET')){ %>checked <% } %> />
+                                <label for="vb.net">VB.NET</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="React JS" value="React JS"
+                                    <% if(arr.includes('React JS')){ %>checked <% } %> />
+                                <label for="React JS">React JS</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="backend flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Backend development</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="node" name="tech" value="Node JS"
+                                    <% if(arr.includes('Node JS')){ %>checked <% } %> />
+                                <label for="node">Node JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="expressjs" value="Express JS"
+                                    <% if(arr.includes('Express JS')){ %>checked <% } %> />
+                                <label for="expressjs">Express JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="dJango" value="dJango"
+                                    <% if(arr.includes('dJango')){ %>checked <% } %> />
+                                <label for="dJango">dJango</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Flask" value="Flask"
+                                    <% if(arr.includes('Flask')){ %>checked <% } %> />
+                                <label for="Flask">Flask</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Python" value="Python"
+                                    <% if(arr.includes('Python')){ %>checked <% } %> />
+                                <label for="Python">Python</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="PHP" value="PHP"
+                                    <% if(arr.includes('PHP')){ %>checked <% } %> />
+                                <label for="PHP">PHP</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Laravel" value="Laravel"
+                                    <% if(arr.includes('Laravel')){ %>checked <% } %> />
+                                <label for="Laravel">Laravel</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="ASP.NET" value="ASP.NET"
+                                    <% if(arr.includes('ASP.NET')){ %>checked <% } %> />
+                                <label for="ASP.NET">ASP.NET</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="database flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Database</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="MongoDB" name="tech" value="Mongo DB"
+                                    <% if(arr.includes('Mongo DB')){ %>checked <% } %> />
+                                <label for="MongoDB">Mongo DB</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="MySQL" value="MySQL"
+                                    <% if(arr.includes('MySQL')){ %>checked <% } %> />
+                                <label for="MySQL">MySQL</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="MSACCESS" value="MS ACCESS"
+                                    <% if(arr.includes('MS ACCESS')){ %>checked <% } %> />
+                                <label for="MSACCESS">MS ACCESS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="CouchDB" value="Couch DB"
+                                    <% if(arr.includes('Couch DB')){ %>checked <% } %> />
+                                <label for="CouchDB">Couch DB</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Cassandra" value="Cassandra"
+                                    <% if(arr.includes('Cassandra')){ %>checked <% } %> />
+                                <label for="Cassandra">Cassandra</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Redis" value="Redis"
+                                    <% if(arr.includes('Redis')){ %>checked <% } %> />
+                                <label for="Redis">Redis</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="FireBase" value="FireBase"
+                                    <% if(arr.includes('FireBase')){ %>checked <% } %> />
+                                <label for="FireBase">FireBase</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="embeded flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Embebeded Programming</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="C" name="tech" value="C" <% if(arr.includes('C')){ %>checked
+                                    <% } %> />
+                                <label for="C">C</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="C++" value="C++"
+                                    <% if(arr.includes('C++')){ %>checked <% } %> />
+                                <label for="C++">C++</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui/ux flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">UI/UX Designing</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="Figma" name="tech" value="Figma"
+                                    <% if(arr.includes('Figma')){ %>checked <% } %> />
+                                <label for="Figma">Figma</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Adobe" value="Adobe"
+                                    <% if(arr.includes('Adobe')){ %>checked <% } %> />
+                                <label for="Adobe">Adobe</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="coloudcomputing flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Cloud Computing</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="Google Cloud" name="tech" value="Google Cloud"
+                                    <% if(arr.includes('Google Cloud')){ %>checked <% } %> />
+                                <label for="Google Cloud">Google Cloud</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="AmazonWebServices" value="Amazon Web Services"
+                                    <% if(arr.includes('Amazon Web Services')){ %>checked <% } %> />
+                                <label for="AmazonWebServices">Amazon Web Services</label>
+                                tech
+                                <div>
+                                    <input type="checkbox" name="tech" id="MicrosofrAzur" value="Microsofr Azur"
+                                        <% if(arr.includes('Microsofr Azur')){ %>checked <% } %> />
+                                    <label for="MicrosofrAzur">Microsofr Azur</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="devops flex flex-col items-start justify-center p-2 mt-2 w-52">
+                            <p class="text-base text-gray-600 mb-2">DevOps</p>
+                            <div class="list flex flex-col text-sm p-2">
+                                <div>
+                                    <input type="checkbox" id="Git" name="tech" value="Git"
+                                        <% if(arr.includes('Git')){ %>checked <% } %> />
+                                    <label for="Git">Git</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tech" id="GitHub" value="GitHub"
+                                        <% if(arr.includes('GitHub')){ %>checked <% } %> />
+                                    <label for="GitHub">GitHub</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tech" id="Docker" value="Docker"
+                                        <% if(arr.includes('Docker')){ %>checked <% } %> />
+                                    <label for="Docker">Docker</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tech" id="Jenkis" value="Jenkis"
+                                        <% if(arr.includes('Jenkis')){ %>checked <% } %> />
+                                    <label for="Jenkis">Jenkis</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tech" id="Ansible" value="Ansible"
+                                        <% if(arr.includes('Ansible')){ %>checked <% } %> />
+                                    <label for="Ansible">Ansible</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="more flex flex-col items-start justify-center p-2 mt-2 w-52">
+                            <p class="text-base text-gray-600 mb-2">More</p>
+                            <div class="list flex flex-col text-sm p-2">
+                                <div>
+                                    <input type="checkbox" id="ai" name="tech" value="Artificial Inteligence"
+                                        <% if(arr.includes('Artificial Inteligence')){ %>checked <% } %> />
+                                    <label for="ai">Artificial Inteligence</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tech" id="ml" value="Machine Learning"
+                                        <% if(arr.includes('Machine Learning')){ %>checked <% } %> />
+                                    <label for="ml">Machine Learning</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tech" id="ds" value="Data science"
+                                        <% if(arr.includes('Data science')){ %>checked <% } %> />
+                                    <label for="ds">Data science</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+
+<script>
+    // auto reload page
+
+    function countChars() {
+
+        let getChars = document.getElementById("description1");
+        let smlMsg = document.getElementsByClassName("small-msg")[0];
+        let len = getChars.value.length;
+        if (len > 300) {
+            getChars.style.border = "1px solid red";
+            smlMsg.style.display = "block";
+        } else {
+            getChars.style.border = "1px solid black";
+            smlMsg.style.display = "none";
+        }
+        console.log(len);
+
+    }
+
+    let suggesions = [
+
+        "React Js",
+        "React Native",
+        "Kotlin",
+        "JQUERY",
+        "Vue Js",
+        "Angular Js",
+        "VB.NET",
+        "Redis",
+        "MS Access",
+        "Cassandra",
+        "MySQL",
+        "Oracle",
+        "FireBase",
+        "CouchDB",
+        "Node JS",
+        "Mongo DB",
+        "Express JS",
+        "CSS",
+        "Html",
+        "Java Script",
+        "AI",
+        "Machine Learning",
+        "Java",
+        "Python",
+        "C#",
+        "C++",
+        "C",
+        "Flutter",
+        "Cloud Computing",
+        "Android",
+        "Asp.net",
+        "PHP",
+        "Ruby",
+        "Swift",
+        "Dark",
+        "IOS",
+        "Objective-C",
+        "Laravel",
+        "GO",
+        "Data Science",
+        "Microsoft Azur",
+        "Google Cloud",
+        "Amazon Web Services",
+        "perl"
+    ];
+
+    const searchwrapper = document.querySelector("#searchbar");
+    const inputbox = document.querySelector("#input");
+    const suggestbox = document.querySelector("#auto-filterbox");
+
+    inputbox.onkeyup = (e) => {
+        let userData = e.target.value;
+        let emptyArray = [];
+        if (userData) {
+            emptyArray = suggesions.filter((data) => {
+                return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+            });
+            emptyArray = emptyArray.map((data) => {
+                return data = '<li>' + data + '</li>';
+            });
+
+            searchwrapper.classList.add("active");
+            showSuggestions(emptyArray);
+            let alllist = suggestbox.querySelectorAll('li');
+            for (let i = 0; i < alllist.length; i++) {
+                alllist[i].setAttribute("onclick", "select(this)");
+            }
+        } else {
+            searchwrapper.classList.remove("active");
+        }
+    }
+
+    function select(element) {
+        let selectUserdata = element.textContent;
+        inputbox.value = selectUserdata;
+        searchwrapper.classList.remove("active");
+    }
+
+    function showSuggestions(list) {
+        let listdata;
+        if (!list.length) {
+            uservalue = inputbox.value;
+            listdata = '<li>' + '</li>';
+        } else {
+            listdata = list.join('');
+        }
+        suggestbox.innerHTML = listdata;
+    }
+    const inputText = document.querySelector('#input');
+    const myaddButton = document.querySelector('#auto-filterbox');
+    const list = document.querySelector('#container ul');
+    myaddButton.addEventListener('click', (e) => {
+        if (inputText.value != "") {
+
+            e.preventDefault();
+            const myLi = document.createElement('li');
+            myLi.innerHTML = inputText.value;
+            list.appendChild(myLi);
+
+            const myspan = document.createElement('span');
+            myspan.innerHTML = `<i class="fa fa-remove"></i>`;
+            myLi.appendChild(myspan);
+        }
+
+        const close = document.querySelectorAll('span');
+        for (let i = 0; i < close.length; i++) {
+
+            close[i].addEventListener('click', () => {
+                close[i].parentElement.style.opacity = 1;
+                setTimeout(() => {
+                    close[i].parentElement.style.display = "none";
+                    close[i].parentElement.remove();
+                }, 500);
+
+            });
+        }
+        inputText.value = "";
+    });
+
+    function skills() {
+        const inputText1 = document.querySelector('#input1');
+        const myaddButton1 = document.querySelector('#button1');
+        const list1 = document.querySelector('#container1 ul');
+
+        if (inputText1.value != "") {
+            const myLi = document.createElement('li');
+            myLi.innerHTML = inputText1.value;
+            list1.appendChild(myLi);
+
+            const myspan = document.createElement('span');
+            myspan.innerHTML = `<i class="fa fa-remove"></i>`;
+            myLi.appendChild(myspan);
+        }
+        const close = document.querySelectorAll('span');
+        for (let i = 0; i < close.length; i++) {
+
+            close[i].addEventListener('click', () => {
+                // close[i].parentElement.style.opacity = 0;
+                setTimeout(() => {
+                    close[i].parentElement.style.display = "none";
+                    close[i].parentElement.remove();
+                }, 500);
+
+            });
+        }
+        inputText1.value = "";
+    }
+
+    function certificates() {
+        const inputText2 = document.querySelector('#input2');
+        const myaddButton2 = document.querySelector('#button2');
+        const list2 = document.querySelector('#container2 ul');
+
+        if (inputText2.value != "") {
+            const myLi = document.createElement('li');
+            myLi.innerHTML = inputText2.value;
+            list2.appendChild(myLi);
+
+            const myspan = document.createElement('span');
+            myspan.innerHTML = `<i class="fa fa-remove"></i>`;
+            myLi.appendChild(myspan);
+        }
+        const close = document.querySelectorAll('span');
+        for (let i = 0; i < close.length; i++) {
+
+            close[i].addEventListener('click', () => {
+                // close[i].parentElement.style.opacity = 0;
+                setTimeout(() => {
+                    close[i].parentElement.style.display = "none";
+                    close[i].parentElement.remove();
+                }, 500);
+
+            });
+        }
+        inputText2.value = "";
+    }
+
+    const chooseFile = document.getElementById("choose-file");
+    const imgPreview = document.getElementById("img-preview");
+
+    chooseFile.addEventListener("change", function () {
+        getImgData();
+    });
+
+    function getImgData() {
+        const files = chooseFile.files[0];
+        if (files) {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(files);
+            fileReader.addEventListener("load", function () {
+                imgPreview.style.display = "block";
+                imgPreview.innerHTML = '<img src="' + this.result + '" />';
+            });
+        }
+    }
+</script>
+
+</html>

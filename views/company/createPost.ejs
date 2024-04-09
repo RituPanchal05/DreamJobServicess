@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../components/headLinks.ejs'); %>
+
+    <title>create new post</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss-colors-css-variables" />
+    <script src="tailwind.config.js">
+    </script>
+    <link href="../styles/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+</head>
+
+<body>
+
+    <!-- header -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border-b-2 border-gray-100 shadow-xl z-10"
+        data-aos="fade-down">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl px-4 py-2 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="px-4 py-2 flex flex-row items-center justify-evenly">
+                <img src="../logo_dark.png" alt="" class="w-28 h-8">
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{'flex': open, 'hidden': !open}"
+                class="flex-col text-center flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:shadow-outline hover:bg-lightgreen focus:bg-lightgreen"
+                    href="/">Job Application</a>
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hfocus:outline-none focus:shadow-outline bg-lightgreen hover:bg-lightgreen focus:bg-lightgreen"
+                    href="/">My Post</a>
+                
+                <div @click.away="open = false" class="relative z-10 " x-data="{ open: false }">
+                    <button @click="open = !open"
+                        class=" flex flex-row items-center w-full px-2 py-2 mt-2 h- 1 text-sm font-semibold text-center bg-transparent rounded-3xl dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 focus:bg-lightgreen focus:outline-none focus:shadow-outline hover:bg-lightgreen">
+                        <span>
+                            <svg width="25" height="25" viewBox="0 0 35 35" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                    fill="#161D6F" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute -left-14 right-0 w-72 mt-2 origin-center rounded-md shadow-lg md:w-48">
+                        <div class="px-2 py-2 bg-white rounded-md shadow">
+                            <div @click.away="open = false" class="relative" x-data="{ open: false } ">
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 35 35" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                                fill="#161D6F" />
+                                        </svg>
+                                    </span>
+                                    <a href="profile"><span class="text-xs">Profile</span></a>
+                                </button>
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M5 3H11C11.7956 3 12.5587 3.31607 13.1213 3.87868C13.6839 4.44129 14 5.20435 14 6V10H13V6C13 5.46957 12.7893 4.96086 12.4142 4.58579C12.0391 4.21071 11.5304 4 11 4H5C4.46957 4 3.96086 4.21071 3.58579 4.58579C3.21071 4.96086 3 5.46957 3 6V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H11C11.5304 21 12.0391 20.7893 12.4142 20.4142C12.7893 20.0391 13 19.5304 13 19V15H14V19C14 19.7956 13.6839 20.5587 13.1213 21.1213C12.5587 21.6839 11.7956 22 11 22H5C4.20435 22 3.44129 21.6839 2.87868 21.1213C2.31607 20.5587 2 19.7956 2 19V6C2 5.20435 2.31607 4.44129 2.87868 3.87868C3.44129 3.31607 4.20435 3 5 3ZM8 12H19.25L16 8.75L16.664 8L21.164 12.5L16.664 17L16 16.25L19.25 13H8V12Z"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <a href="logout"><span class="text-xs">Sign Out</span></a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- content -->
+    <main class="main px-6 mt-1 md:px-16 py-6 flex items-center justify-center m-auto">
+        <form action="createPost" method="post">
+            <div class="w-[45rem]">
+                <h1 class="text-2xl mb-2 bg-white text-midnight">Post new job</h1>
+
+                <div class="job-info w-full border-b-2 py-2 mb-5">
+                    <!--    Title      -->
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm mb-2" for="job-title">Post Title</label>
+                        <input
+                            class="appearance-none block w-full bg-whitetext-gray-700 border border-gray-400 rounded text-xs py-2 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                            type="text" id="job-title" name="postTitle" placeholder="Frontend Developer" autofocus required>
+                    </div>
+
+
+                    <!--    Description      -->
+                    <div>
+                        <label for="description" class="block text-gray-700 text-sm mb-2">Post Description</label>
+                        <textarea name="description" placeholder="Description" id="description" cols="" rows=""
+                            class="block w-full text-xs bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"></textarea>
+                    </div>
+
+                    <!-- Technologies -->
+
+                   <!-- global var -->
+
+        <form action="profile" method="post">
+
+            <div
+                class="w-[45rem] h-auto p-7 mt-2 text-gray-700 dark-mode:text-gray-200 dark-mode:bg-gray-800 border border-gray-100 rounded">
+                <div class="flex flex-row justify-between">
+                    <span class="text-2xl text-midnight"> Technologies... </span> 
+                    <button
+                        class="px-4 border-2 border-midnight rounded bg-lightgreen text-xs shadow-2xl" type="submit">Edit</button>                   
+                </div>
+
+                <div class="technology-list flex flex-row flex-wrap justify-start items-start">
+
+                    <div class="mobile flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Mobile development</p>
+                        <input type="hidden" name="typeOfInput" value="tech" />
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="android" name="tech" value="Android" />
+                                <label for="android">Android</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="java" value="Java"/>
+                                <label for="java">Java</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="kotlin" value="Kotlin"/>
+                                <label for="kotlin">Kotlin</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="swift" value="Swift"/>
+                                <label for="swift">Swift</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="flutter" value="Flutter" />
+                                <label for="flutter">Flutter</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="reactnative" value="React Native" />
+                                <label for="reactnative">React Native</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="ionic" value="Ionic" />
+                                <label for="ionic">Ionic</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="objective-c" value="Objectie-C" />
+                                <label for="objective-c">Objectie-C</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="frontend flex flex-col items-start justify-center p-2 mt-2 w-52 ">
+                        <p class="text-base text-gray-600 mb-2">Frontend development</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="html" name="tech" value="HTML"  />
+                                <label for="html">HTML</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="css" value="CSS"  />
+                                <label for="css">CSS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="angular" value="Angular JS" />
+                                <label for="angular">Angular JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="vue" value="Vue JS"/>
+                                <label for="vue">Vue JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="jquery" value="jQuery"  />
+                                <label for="jquery">jQuery</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="vb.net" value="VB.NET" />
+                                <label for="vb.net">VB.NET</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="React JS" value="React JS" />
+                                <label for="React JS">React JS</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="backend flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Backend development</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="node" name="tech" value="Node JS" />
+                                <label for="node">Node JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="expressjs" value="Express JS" />
+                                <label for="expressjs">Express JS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="dJango" value="dJango"/>
+                                <label for="dJango">dJango</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Flask" value="Flask" />
+                                <label for="Flask">Flask</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Python" value="Python"/>
+                                <label for="Python">Python</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="PHP" value="PHP" />
+                                <label for="PHP">PHP</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Laravel" value="Laravel" />
+                                <label for="Laravel">Laravel</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="ASP.NET" value="ASP.NET"/>
+                                <label for="ASP.NET">ASP.NET</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="database flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Database</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="MongoDB" name="tech" value="Mongo DB"/>
+                                <label for="MongoDB">Mongo DB</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="MySQL" value="MySQL" />
+                                <label for="MySQL">MySQL</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="MSACCESS" value="MS ACCESS"/>
+                                <label for="MSACCESS">MS ACCESS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="CouchDB" value="Couch DB"  />
+                                <label for="CouchDB">Couch DB</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Cassandra" value="Cassandra" />
+                                <label for="Cassandra">Cassandra</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Redis" value="Redis"/>
+                                <label for="Redis">Redis</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="FireBase" value="FireBase" />
+                                <label for="FireBase">FireBase</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="embeded flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">Embebeded Programming</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="C" name="tech" value="C"/>
+                                <label for="C">C</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="C++" value="C++"  />
+                                <label for="C++">C++</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui/ux flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">UI/UX Designing</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="Figma" name="tech" value="Figma" />
+                                <label for="Figma">Figma</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Adobe" value="Adobe"  />
+                                <label for="Adobe">Adobe</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="coloudcomputing flex flex-col items-start justify-center p-2 mt-2 w-52 ">
+                        <p class="text-base text-gray-600 mb-2">Cloud Computing</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="Google Cloud" name="tech" value="Google Cloud" />
+                                <label for="Google Cloud">Google Cloud</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="AmazonWebServices" value="Amazon Web Services"  />
+                                <label for="AmazonWebServices">Amazon Web Services</label>
+                            tech
+                            <div>
+                                <input type="checkbox" name="tech" id="MicrosofrAzur" value="Microsofr Azur"  />
+                                <label for="MicrosofrAzur">Microsofr Azur</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="devops flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">DevOps</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="Git" name="tech" value="Git" />
+                                <label for="Git">Git</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="GitHub" value="GitHub"  />
+                                <label for="GitHub">GitHub</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Docker" value="Docker" />
+                                <label for="Docker">Docker</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Jenkis" value="Jenkis"  />
+                                <label for="Jenkis">Jenkis</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="Ansible" value="Ansible
+                                <label for="Ansible">Ansible</label>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="more flex flex-col items-start justify-center p-2 mt-2 w-52">
+                        <p class="text-base text-gray-600 mb-2">More</p>
+                        <div class="list flex flex-col text-sm p-2">
+                            <div>
+                                <input type="checkbox" id="ai" name="tech" value="Artificial Inteligence"  />
+                                <label for="ai">Artificial Inteligence</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="ml" value="Machine Learning" />
+                                <label for="ml">Machine Learning</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tech" id="ds" value="Data science"  />
+                                <label for="ds">Data science</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </form>
+
+                    <div class="flex flex-col justify-between">
+                        <div id="container1">
+                            <ul class="flex flex-row flex-wrap">
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!--     Dates    -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 text-sm mb-2" for="date">Start Date</label>
+                        <input
+                            class="appearance-none  w-52 text-xs bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                            type="date" id="apply-link" name="s_date" required>
+                        <label class=" text-gray-700 text-sm mb-2" for="apply-link">To</label>
+                        <input
+                            class="appearance-none  w-52 text-xs bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                            type="date" id="apply-link" name="e_date" required>
+                    </div>
+
+                    <!--     vaccancies     -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 text-xs mb-2" for="vaccancies">Vaccancies</label>
+                        <input
+                            class="appearance-none block w-full text-xs bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                            type="number" id="vaccancies" name="vaccancies" placeholder="10"  required>
+                    </div>
+
+                    <!--     experience    -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 text-xs mb-2" for="Experience">Experience</label>
+                        <input
+                            class="appearance-none block w-full text-xs bg-white text-gray-700 border border-gray-400 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                            type="number" id="Experience" name="experience" placeholder="2" required>
+                    </div>
+
+                    <div class="md:flex md:justify-between">
+                        <!--      Job Type      -->
+                        <div class="w-full md:w-3/12 mb-4 md:mb-0">
+                            <label class="block text-gray-700 text-xs mb-2" for="job-type">
+                                Employment Type
+                            </label>
+                            <div class="relative">
+                                <select
+                                    class="block appearance-none w-52 bg-white border border-gray-400 text-gray-700 text-xs py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500"
+                                    id="jobtype" name="jobtype" required>
+                                    <option value="fulltime">Full-time</option>
+                                    <option value="parttime">Part-time</option>
+                                </select>
+
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end job-info -->
+
+                    <!--     Submit     -->
+                    <div>
+                        <button
+                        class="px-4 py-2 border-2 border-midnight rounded bg-lightgreen text-xs shadow-2xl" type="submit">Create</button>    
+                    </div>
+
+                </div>
+        </form>
+    </main>
+
+    <footer class="footer py-4">
+        <p class="text-center text-gray-600 text-xs">
+            &copy;2022 Dream Job Services
+        </p>
+    </footer>
+
+
+</body>
+
+<script>
+    let simpleMde = new SimpleMDE({
+        element: document.getElementById("description")
+    });
+
+    function skills() {
+        const inputText1 = document.querySelector('#input1');
+        const myaddButton1 = document.querySelector('#input1');
+        const list1 = document.querySelector('#container1 ul');
+
+        if (inputText1.value != "") {
+            const myLi = document.createElement('li');
+            myLi.innerHTML = inputText1.value;
+            list1.appendChild(myLi);
+
+            const myspan = document.createElement('span');
+            myspan.innerHTML = `<i class="fa fa-remove"></i>`;
+            myLi.appendChild(myspan);
+        }
+        const close = document.querySelectorAll('span');
+        for (let i = 0; i < close.length; i++) {
+
+            close[i].addEventListener('click', () => {
+                // close[i].parentElement.style.opacity = 0;
+                setTimeout(() => {
+                    close[i].parentElement.style.display = "none";
+                    close[i].parentElement.remove();
+                }, 500);
+
+            });
+        }
+        inputText1.value = "";
+    }
+</script>
+
+</html>

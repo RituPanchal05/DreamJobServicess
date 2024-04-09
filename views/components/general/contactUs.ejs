@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .contactus {
+
+      position: relative;
+      width: 100%;
+      padding: 20px 100px;
+      box-sizing: border-box;
+      font-size: 1em;
+
+    }
+
+    .contactus .title {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contactus .title .getintouch {
+      border-radius: 15px;
+      font-size: 20px;
+      padding: 6px;
+      border: 3px solid #161D6F;
+    }
+
+    .form {
+      grid-area: form;
+    }
+
+    .info {
+      grid-area: info;
+    }
+
+    .map {
+      grid-area: map;
+    }
+
+    .contact {
+      padding: 30px;
+      /* /height: 250px;/ */
+      background-color: #fff;
+      box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .box {
+      position: relative;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 5fr 4fr;
+      grid-template-areas:
+
+        "form info"
+        "form map";
+      grid-gap: 20px;
+      margin-top: 20px;
+      height: 580px;
+
+    }
+
+    .contact h4 {
+
+      font-size: 1.1em;
+      margin-top: -30px;
+      color: #161D6F;
+      padding: 8px;
+    }
+
+    h5 {
+      color: white;
+    }
+
+    .formBox {
+
+      position: relative;
+      width: 100%;
+    }
+
+    .formBox .row50 {
+
+      display: flex;
+      gap: 20px;
+    }
+
+    .inputBox {
+
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      width: 50%;
+
+    }
+
+    .formBox .row100 .inputBox {
+      width: 100%;
+    }
+
+    .inputBox span {
+
+      color: #161D6F;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .inputBox input {
+
+      padding: 8px;
+      outline: none;
+      border: 1px solid #333;
+      font-size: 12px;
+    }
+
+    .inputBox textarea {
+
+      padding: 8px;
+      outline: none;
+      border: 1px solid #333;
+      resize: none;
+      font-size: 12px;
+      min-height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .inputBox input[type="submit"] {
+      background: #161D6F;
+      color: #fff;
+      border: none;
+      max-width: 120px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 10px 12px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 3px solid #C7FFD8;
+    }
+
+    .inputBox input[type="submit"]:hover {
+
+      background: #C7FFD8;
+      color: black;
+      border: 3px solid #161D6F;
+    }
+
+    .info {
+      background-color: #161D6F;
+    }
+
+    .info h4 {
+      color: #fff;
+
+    }
+
+    .info .infobox div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+    }
+
+    .info .infobox div span {
+
+      min-width: 30px;
+      height: 30px;
+      background-color: #C7FFD8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .infobox {
+      margin-top: 15px;
+    }
+
+    .info .infobox div span:hover {
+      color: #C7FFD8;
+      background-color: black;
+    }
+
+    .info .infobox div p {
+      color: #fff;
+
+    }
+
+    .info .infobox div a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #social {
+      margin-top: 30px;
+      display: flex;
+
+    }
+
+    #social #c {
+      list-style-type: none;
+      margin-right: 15px;
+    }
+
+    #social #c a {
+      color: #fff;
+      font-size: 2em;
+      color: #ccc;
+    }
+
+    #social #c a:hover {
+      color: #fff;
+    }
+
+    .map {
+      padding: 0;
+     
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 991px) {
+      .contactus {
+        padding: 20px;
+      }
+
+      .box {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "form"
+          "info"
+          "map";
+      }
+
+      .map {
+        min-height: 300px;
+      }
+
+      .formBox .row50 {
+        display: flex;
+        gap: 0;
+        flex-direction: column;
+      }
+
+      .inputBox {
+        width: 100%;
+      }
+
+      .contact {
+        padding: 30px;
+      }
+
+      .map {
+        min-height: 300px;
+        padding: 0;
+      }
+
+      h2 {
+        font-size: 14;
+      }
+
+      h4 {
+        font-size: 12;
+      }
+    }
+  </style>
+ 
+</head>
+
+<body>
+  <div class="contactus">
+    <div class="title">
+      <span class="getintouch text">Get In Touch</span>
+    </div>
+    <div class="box">
+      <!--Form-->
+      <div class="contact form">
+        <h5 style="color: midnightblue;">Send Message</h5>
+        <form>
+          <div class="formBox">
+            <div class="row50">
+              <div class="inputBox">
+                <span>First Name</span>
+                <input type="text" placeholder="Enter First Name" required>
+              </div>
+              <div class="inputBox">
+                <span>Last Name</span>
+                <input type="text" placeholder="Enter Last Name" required>
+              </div>
+            </div>
+            <div class="row50">
+              <div class="inputBox">
+                <span>Email</span>
+                <input type="text" placeholder="Enter Email" required>
+              </div>
+              <div class="inputBox">
+                <span>Mobile</span>
+                <input type="number" placeholder=" +91 1234345654" required>
+              </div>
+            </div>
+            <div class="row100">
+              <div class="inputBox">
+                <span>Message</span>
+                <textarea placeholder="Write Your Message Here!" required></textarea>
+              </div>
+            </div>
+            <div class="row100">
+              <div class="inputBox">
+                <input type="submit" value="Send">
+
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <!--Info Box-->
+      <div class="contact info">
+        <h5>Contact Info</h5>
+        <div class="infobox">
+          <div>
+            <span style="font-size: 14px;">
+              <ion-icon name="location"></ion-icon>
+            </span>
+            <p style="font-size: 14px;">GPG , Ahmedabad <br>INDIA</p>
+          </div>
+          <div>
+            <span style="font-size: 14px;">
+              <ion-icon name="mail"></ion-icon>
+            </span>
+            <a href="mailto:loremsum@gmail.com" style="font-size: 14px;">DJS124@gmail.com</a>
+          </div>
+          <div>
+            <span style="font-size: 14px;">
+              <ion-icon name="call"></ion-icon>
+            </span>
+            <a href="tel:+913454345654" style="font-size: 14px;">+91 1234543245</a>
+
+          </div>
+          <!--Social Media Links -->
+
+          <ul id="social">
+            <li id="c"><a href="#">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a></li>
+            <li id="c"><a href="#">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a></li>
+            <li id="c"><a href="#">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a></li>
+            <li id="c"><a href="#">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a></li>
+          </ul>
+
+        </div>
+      </div>
+      <!--map Box-->
+      <div class="contact map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.7158046250497!2d72.54168941491945!3d23.
+                034204784947203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84c03a51c46f%3A0xa17457a0a2561268!2
+                sGovernment%20Polytechnic%20For%20Girls%20AHMEDABAD!5e0!3m2!1sen!2sin!4v1646202373683!5m2!1sen!2sin"
+          style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+
+</body>
+
+</html>

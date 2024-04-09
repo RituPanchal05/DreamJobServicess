@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../components/headLinks.ejs'); %>
+
+    <title>Job application</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss-colors-css-variables" />
+    <script src="tailwind.config.js">
+    </script>
+    <link href="../styles/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+
+        html * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        #flip-card-wrap-all {
+            width: 450px;
+            height: 380px;
+        }
+
+        #flip-card-wrap-all .flip-card-3D-wrapper {
+            width: 90%;
+            height: 80%;
+            position: relative;
+            -o-perspective: 900px;
+            -webkit-perspective: 900px;
+            -ms-perspective: 900px;
+            perspective: 900px;
+            padding: 0 10px 0 10px;
+        }
+
+
+        #flip-card-wrap-all .flip-card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            -o-transition: all 1s ease-in-out;
+            -webkit-transition: all 1s ease-in-out;
+            -ms-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out;
+            -o-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        #flip-card-wrap-all .do-flip {
+            -o-transform: rotateY(-180deg);
+            -webkit-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+        }
+
+        #flip-card-wrap-all .flip-card-btn-turn-to-back,
+        #flip-card-wrap-all .flip-card-btn-turn-to-front {
+            cursor: pointer;
+            visibility: hidden;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: .7em;
+            padding: 0;
+            margin-left: 7px;
+        }
+
+        .flip-card-back {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+        }
+
+        #flip-card-wrap-all .flip-card .flip-card-front,
+        #flip-card-wrap-all .flip-card .flip-card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            -o-backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            z-index: 2;
+        }
+
+        #flip-card-wrap-all .flip-card .flip-card-back {
+            -o-transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            -ms-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+
+        #flip-card-wrap-all .flip-card .flip-card-front p,
+        #flip-card-wrap-all .flip-card .flip-card-back p {
+            color: grey;
+            position: absolute;
+            top: 40%;
+            width: 100%;
+        }
+
+        .explain-bar {
+            margin-top: 20px;
+            border: 1px solid gray;
+            border-radius: 8px;
+            display: flex;
+            height: 66px;
+            padding: 0 16px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .overview-text {
+            margin-top: 5px;
+        }
+
+        .overview-text-header {
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .overview-text-subheader {
+            font-size: 13px;
+        }
+
+        .overview-text-item {
+            font-size: 12px;
+            position: relative;
+            display: flex;
+        }
+
+        .overview-text-item+.overview-text-item {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .overview-text-item:before {
+            content: "";
+            border: 2px solid #61bcff;
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            margin: 5px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+    </style>
+
+</head>
+
+<body class="bg-white">
+
+    <!-- header -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border-b-2 border-gray-100 shadow-xl z-10"
+        data-aos="fade-down">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl px-4 py-2 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="px-4 py-2 flex flex-row items-center justify-evenly">
+                <img src="../logo_dark.png" alt="" class="w-28 h-8">
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{'flex': open, 'hidden': !open}"
+                class="flex-col text-center flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:shadow-outline bg-lightgreen hover:bg-lightgreen focus:bg-lightgreen"
+                    href="/">Job Application</a>
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hfocus:outline-none focus:shadow-outline hover:bg-lightgreen focus:bg-lightgreen"
+                    href="company/myPost">My Post</a>
+                <hr />
+                <div @click.away="open = false" class="relative z-10 " x-data="{ open: false }">
+                    <button @click="open = !open"
+                        class=" flex flex-row items-center w-full px-2 py-2 mt-2 h- 1 text-sm font-semibold text-center bg-transparent rounded-3xl dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 focus:bg-lightgreen focus:outline-none focus:shadow-outline hover:bg-lightgreen">
+                        <span>
+                            <svg width="25" height="25" viewBox="0 0 35 35" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                    fill="#161D6F" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute -left-14 right-0 w-72 mt-2 origin-center rounded-md shadow-lg md:w-48">
+                        <div class="px-2 py-2 bg-white rounded-md shadow">
+                            <div @click.away="open = false" class="relative" x-data="{ open: false } ">
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 35 35" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                                fill="#161D6F" />
+                                        </svg>
+                                    </span>
+                                    <a href="company/profile"><span class="text-xs">Profile</span></a>
+                                </button>
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M5 3H11C11.7956 3 12.5587 3.31607 13.1213 3.87868C13.6839 4.44129 14 5.20435 14 6V10H13V6C13 5.46957 12.7893 4.96086 12.4142 4.58579C12.0391 4.21071 11.5304 4 11 4H5C4.46957 4 3.96086 4.21071 3.58579 4.58579C3.21071 4.96086 3 5.46957 3 6V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H11C11.5304 21 12.0391 20.7893 12.4142 20.4142C12.7893 20.0391 13 19.5304 13 19V15H14V19C14 19.7956 13.6839 20.5587 13.1213 21.1213C12.5587 21.6839 11.7956 22 11 22H5C4.20435 22 3.44129 21.6839 2.87868 21.1213C2.31607 20.5587 2 19.7956 2 19V6C2 5.20435 2.31607 4.44129 2.87868 3.87868C3.44129 3.31607 4.20435 3 5 3ZM8 12H19.25L16 8.75L16.664 8L21.164 12.5L16.664 17L16 16.25L19.25 13H8V12Z"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <a href="logout"><span class="text-xs">Sign Out</span></a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- content -->
+
+
+    <div class="flex flex-row items-center justify-start flex-wrap ">
+        <%
+    applications.forEach(callFunction)
+        
+    function callFunction(item) {            
+
+        %>
+
+        <div id="flip-card-wrap-all" class="flex mt-10 ">
+            <div class="flip-card-3D-wrapper">
+                <div class="flip-card">
+
+                    <%
+                    postName = postData.filter((result)=>{
+                        if(item.postId == result.id){
+                            return result
+                        }
+                    })
+                    jobseeker = jobseekersData.filter((result2)=>{
+                        if(item.jobseekerId == result2.id){
+                            return result2
+                        }
+                    })
+                    %>
+                    
+                    <div
+                        class="flip-card-front bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 rounded shadow-md hover:border-dashed border-2 border-gray-300 z-10">
+                        <span class="text-lg font-bold text-right px-4 py-1" title="54#sdf@asd$@213"><%= postName[0].postTitle %></span><br>
+                        <div class="flex p-4">
+                            <div>
+                                <img class="inline-block object-cover rounded-full" src="<%= jobseeker[0].dpImg.avatar %>"
+                                    alt="Profile image" height="40" width="40" />
+                            </div>
+                            <div>
+                                <div class="flex flex-col">
+                                    <div class="flex flex-row justify-between">
+                                        <span class="text-midnight text-sm ml-3 mt-2"><%= jobseeker[0].name %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-row flex-wrap w-auto text-left mx-2 my-2 mt-1 rounded ">                            
+                            <span class="border-2 border-gray-300 p-1 ml-2"><span class="text-xs text-gray-400 ">User Id</span>
+                                <span class="block text-xs text-gray-700 w-auto "><%= jobseeker[0].id %></span>
+                            </span>
+                            <span class="border-2 border-gray-300 p-1 ml-2"><span class="text-xs text-gray-400">Post Id</span>
+                                <span class="block text-xs text-gray-700 w-auto"><%= postName[0].id %></span>
+                            </span>
+
+                        </div>
+
+                        <div class="ml-4">
+                            Status 
+                            <%
+                                if(item.decision){
+                                    %>
+                                    <%= item.decision %>
+                                    <%
+                                }else{
+                                    %>
+                                    pending
+                                    <%
+                                }
+                            %>
+                        </div>
+                        
+                        <form action="/company" method="post">
+                            <div class="flex flex-row px-3">
+                                    <input type="hidden" name="jobseekerId" value="<%= jobseeker[0].id %>" />
+                                    <input type="hidden" name="postId" value="<%= postName[0].id %>" />
+                                    <button id="a"
+                                        class="flex items-start  w-24 py-1 text-sm justify-center mt-8 bg-midnight dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:text-gray-200  border-solid border-2 border-midnight hover:border-midnight hover:bg-lightgreen hover:text-black rounded-3xl hover:shadow-xl transition ease-in-out delay-150 duration-200" type="submit" value="selected" name="select" >Select</button>
+                                    <button id="a"
+                                        class="flex items-start  w-24 py-1 ml-2 text-sm justify-center mt-8 bg-midnight dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:text-gray-200  border-solid border-2 border-midnight hover:border-midnight hover:bg-lightgreen hover:text-black rounded-3xl hover:shadow-xl transition ease-in-out delay-150 duration-200" type="submit" value="rejected" name="reject" >Reject</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%
+        }
+        %>
+    </div>
+
+    
+    <%- include("../components/general/footer.ejs") %>
+
+    <%- include("../components/general/feedback.ejs") %>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../components/headLinks.ejs'); %>   
+        <title>Login</title>   
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+    </head>
+
+    <style>
+
+        .errorMsg {
+            background-color: aliceblue;
+            color: crimson;
+            border: 1px solid crimson;
+            border-radius: 0.5rem;
+            font-size: .8rem;
+        }
+
+    </style>
+
+    <body>        
+        
+        <form action="/login" method="post">
+            <div class="bg-partialwhite min-h-screen flex flex-col">
+                
+                <div class="w-[20rem] mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                        <h1 class="mb-8 text-3xl text-center bg-white text-midnight">Login</h1>
+                        <% 
+                            var error = error;
+                            if(error !== undefined) {
+                                %>
+                                <h1 class="errorMsg" > <i class="fa-solid fa-circle-exclamation" style="margin: 0 3rem 0 -2rem;"></i> <%= error %></h1>
+                                <%
+                            }
+                        %>
+                        <input 
+                        type="text"
+                        class="block border border-grey-light w-full p-3 rounded mb-4 focus:outline-0"
+                        name="email"
+                        placeholder="Email" />
+
+                        <input 
+                        type="password"
+                        class="block border border-grey-light w-full p-3 rounded mb-4 focus:outline-0"
+                        name="password"
+                        placeholder="Password" />
+                        <div>
+                            <button type="submit" class="w-full text-center py-3 text-sm font-semibold bg-midnight dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:text-gray-200  text-white border-solid border-2 border-midnight hover:border-midnight hover:bg-lightgreen hover:text-black rounded hover:shadow-xl transition ease-in-out delay-150 duration-200 mt-3">Continue</button>
+                        </div>
+                   </div>
+              </div>  
+            </div>
+        </form>
+    </body>
+</html>

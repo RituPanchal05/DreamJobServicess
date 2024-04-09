@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>makeResume</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"> -->
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        body {
+            width: 100vw;
+            height: auto;
+            margin: auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* for resume design number 2 */
+
+        .resume-2 {
+            margin-top: 0rem;
+            position: relative;
+            height: 60rem;
+            width: 50rem;
+            border-radius: 10px;
+            margin-bottom: 10rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            border: 2px solid gray;
+        }
+
+        .resume-2 .flex-1 {
+            max-width: 33%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px 0 20px 0;
+            font-size: 14px;
+        }
+
+        .resume-2 .flex-1 .img {
+            border: 10px solid #FF8000;
+            border-radius: 100%;
+            z-index: 1;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .resume-2 .flex-1 .img img {
+            width: 220px;
+            height: 220px;
+            border-radius: 100%;
+        }
+
+        .resume-2 .flex-1 .content-1 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            background-color: #FF8000;
+            width: 90%;
+            height: calc(100% - 220px);
+            margin-top: -75px;
+            z-index: -2;
+            padding: 80px 20px 20px 20px;
+            text-align: left;
+        }
+
+        .resume-2 .content-1 .profile {
+            width: 100%;
+        }
+
+        .resume-2 .content-1 .contact {
+            width: 100%;
+        }
+
+        .resume-2 .content-1 .references {
+            width: 100%;
+        }
+
+        .resume-2 .content-1 h4 {
+            text-transform: uppercase;
+            font-size: 15px;
+            line-height: 30px;
+            color: #161d6f;
+        }
+
+        .resume-2 .content-1 p {
+            color: whitesmoke;
+        }
+
+        .resume-2 .flex-2 {
+            min-width: 60%;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .flex-2 ul:focus {
+            outline: 3px solid lightgray;
+            border-radius: 10px;
+        }
+
+        .resume-2 .flex-2 .personal-detail {
+            height: 15%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .resume-2 .personal-detail h1 {
+            color: #161d6f;
+            font-size: 3rem;
+        }
+
+        .resume-2 .personal-detail p {
+            color: #FF8000;
+            font-size: 20px;
+        }
+
+        .resume-2 .flex-2 h4 {
+            text-transform: uppercase;
+            font-size: 15px;
+            line-height: 30px;
+            color: #161d6f;
+        }
+
+        .resume-2 .flex-2 .education {
+            height: 23%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 16px;
+        }
+
+        .education ul {
+            overflow-y: scroll;
+        }
+
+        .resume-2 .flex-2 .employment {
+            height: 25%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 16px;
+        }
+
+        .employment ul {
+            overflow-y: scroll;
+        }
+
+        .resume-2 .flex-2 .skill-exp {
+            height: 25%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 16px;
+        }
+
+        .skill-exp ul {
+            overflow-y: scroll;
+        }
+
+        ul {
+            position: relative;
+            margin-left: 0;
+            padding-left: 1.2em;
+        }
+
+        ul::-webkit-scrollbar {
+            width: 0;
+            /* Remove scrollbar space */
+            background: transparent;
+            /* Optional: just make scrollbar invisible */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button id="resumebtn">Generate pdf</button>
+
+    <div class="resume-2" id="resume">
+        <div class="flex-1">
+            <div class="img">
+                <img src="companyProfile.png" alt="">
+            </div>
+            <div class="content-1">
+                <div class="profile">
+                    <h4>profile</h4>
+                        <span>Email</span>
+                        <p contenteditable="true" class="mt-2"><%= title.educationInfo.description %></p>
+                </div>
+                <div class="contact">
+                    <h4>contacts</h4>
+                        <span>Mobile</span>
+                        <p contenteditable="true" class="mt-2"><%= title.mobileNo %></p>
+                        <br>
+                        <span>Email</span>
+                        <p contenteditable="true" class="mt-2"><%= title.email %></p>
+                </div>
+                <div class="references">
+                    <h4>employment</h4>
+                    <span>Company Name</span>
+                        <p contenteditable="true" class="mt-2"><%= title.workBackgroundInfo.compname %></p>
+                        <br>
+                        <span>Role</span>
+                        <p contenteditable="true" class="mt-2"><%= title.workBackgroundInfo.position %></p>
+                </div>
+            </div>
+        </div>
+        <div class="flex-2">
+            <div class="personal-detail">
+                <h1><%= title.name %></h1>
+                <p>Computer science & technology</p>
+            </div>
+            <div class="education">
+                <h4>Education</h4>
+                <ul>
+                    <li contenteditable="true" id="edu-li-1"></li>
+                    <li contenteditable="true" id="edu-li-2"></li>
+                </ul>
+            </div>
+            <div class="employment">
+                <h4>references</h4>
+                <ul>
+                    <li contenteditable="true" id="emp-li-1"></li>
+                    <li contenteditable="true"  id="emp-li-2"></li>
+                </ul>
+            </div>
+            <div class="skill-exp">
+                <h4>skill & experience</h4>
+                <ul>
+                    <li contenteditable="true" id="s-li-1"></li>
+                    <li contenteditable="true" id="s-li-2"></li>
+                    <li contenteditable="true" id="s-li-3"></li>
+                    <li contenteditable="true" id="s-li-4"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="html2pdf.bundle.min.js"></script>
+
+    <script>
+        var resume = document.getElementById('resume');
+        var resumebtn = document.getElementById('resumebtn');
+        
+        // get the html of the resume
+            
+
+        function beforePdf() {
+            //set data in local storage
+            var eduLi1 = document.getElementById("edu-li-1").innerHTML;
+            var eduLi2 = document.getElementById("edu-li-2").innerHTML;
+            var empLi1 = document.getElementById("emp-li-1").innerHTML;
+            var empLi2 = document.getElementById("emp-li-2").innerHTML;
+            var sLi1 = document.getElementById("s-li-1").innerHTML;
+            var sLi2 = document.getElementById("s-li-2").innerHTML;
+            var sLi3 = document.getElementById("s-li-3").innerHTML;
+            var sLi4 = document.getElementById("s-li-4").innerHTML;
+            
+            if(eduLi1 !== ""){
+                localStorage.setItem("edu-li-1", eduLi1);
+            }
+            if(eduLi2 != ""){
+                localStorage.setItem("edu-li-2", eduLi2);
+            }
+            if(empLi1 != ""){
+                localStorage.setItem("emp-li-1", empLi1);
+            }
+            if(empLi2 != ""){
+                localStorage.setItem("emp-li-2", empLi2);
+            }
+            if(sLi1 != ""){
+                localStorage.setItem("s-li-1", sLi1);
+            }
+            if(sLi2 != ""){
+                localStorage.setItem("s-li-2", sLi2);
+            }
+            if(sLi3 != ""){
+                localStorage.setItem("s-li-3", sLi3);
+            }
+            if(sLi4 != ""){
+                localStorage.setItem("s-li-4", sLi4);
+            }
+
+
+            resume.style.border = "none";
+            resume.style.height = "70rem";
+        }
+        function afterPdf() {
+            resume.style.border = "2px solid gray";
+            resume.style.height = "60rem";
+        }
+
+        var opt = {
+            filename:     'myResume.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };    
+        function generatePdf() {
+            
+            html2pdf().from(resume).set(opt).save();
+            
+        }
+
+        resumebtn.addEventListener('click', function() {
+
+            //set parameter for pdf adjustment
+            beforePdf();
+            //generate pdf
+            setTimeout(generatePdf(), 2000);     
+            
+            //reset parameter after pdf adjustment
+            setTimeout(afterPdf, 5000);
+
+        });
+
+        window.addEventListener('load', function() {
+
+            //set data in local storage
+            var eduLi1 = document.getElementById("edu-li-1");
+            var eduLi2 = document.getElementById("edu-li-2");
+            var empLi1 = document.getElementById("emp-li-1");
+            var empLi2 = document.getElementById("emp-li-2");
+            var sLi1 = document.getElementById("s-li-1");
+            var sLi2 = document.getElementById("s-li-2");
+            var sLi3 = document.getElementById("s-li-3");
+            var sLi4 = document.getElementById("s-li-4");
+            
+            if(localStorage.getItem("edu-li-1") !== null) {
+                eduLi1.innerHTML = localStorage.getItem("edu-li-1");
+            }
+            if(localStorage.getItem("edu-li-2") !== null) {
+                eduLi2.innerHTML = localStorage.getItem("edu-li-2");
+            }
+            if(localStorage.getItem("emp-li-1") !== null) {
+                empLi1.innerHTML = localStorage.getItem("emp-li-1");
+            }
+            if(localStorage.getItem("emp-li-2") !== null) {
+                empLi2.innerHTML = localStorage.getItem("emp-li-2");
+            }
+            if(localStorage.getItem("s-li-1") !== null) {
+                sLi1.innerHTML = localStorage.getItem("s-li-1");
+            }
+            if(localStorage.getItem("s-li-2") !== null) {
+                sLi2.innerHTML = localStorage.getItem("s-li-2");
+            }
+            if(localStorage.getItem("s-li-3") !== null) {
+                sLi3.innerHTML = localStorage.getItem("s-li-3");
+            }
+            if(localStorage.getItem("s-li-4") !== null) {
+                sLi4.innerHTML = localStorage.getItem("s-li-4");
+            }          
+
+        });
+
+    </script>
+
+</body>
+
+</html>

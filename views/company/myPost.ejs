@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../components/headLinks.ejs'); %>
+
+    <title>My posts</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss-colors-css-variables" />
+    <script src="tailwind.config.js">
+    </script>
+    <link href="../styles/styles.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+        h1,
+        input {
+            color: #444;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        h1 {
+            border-bottom: 1px dashed #666;
+            padding-bottom: 16px;
+        }
+
+        form {
+            padding: 0;
+            margin: 0;
+        }
+
+        input.search-text {
+            color: #222;
+            position: relative;
+            z-index: 5;
+            transition: z-index 0.8s, width 0.5s, background 0.3s ease, border 0.3s;
+            height: 45px;
+            width: 0;
+            padding: 0px 0 0px 40px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 30px;
+            /*background: url(search.png) no-repeat left 9px center transparent;*/
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUxMiA1MTIiIGhlaWdodD0iNTEycHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik01MDMuODY2LDQ3Ny45NzRMMzYwLjk1OCwzMzUuMDUyYzI4LjcyNS0zNC41NDQsNDYuMDE3LTc4LjkxMiw0Ni4wMTctMTI3LjMzNiAgYzAtMTEwLjA4NC04OS4yMjctMTk5LjMxMi0xOTkuMzEyLTE5OS4zMTJDOTcuNTk5LDguNDAzLDguMzUxLDk3LjYzMSw4LjM1MSwyMDcuNzE1YzAsMTEwLjA2NCw4OS4yNDgsMTk5LjMxMiwxOTkuMzEyLDE5OS4zMTIgIGM0OC40MzUsMCw5Mi43OTItMTcuMjkyLDEyNy4zMzYtNDYuMDE3bDE0Mi45MDgsMTQyLjkyMkw1MDMuODY2LDQ3Ny45NzR6IE0yOS4zMzEsMjA3LjcxNWMwLTk4LjMzNCw3OS45ODctMTc4LjMzMiwxNzguMzMyLTE3OC4zMzIgIGM5OC4zMjUsMCwxNzguMzMyLDc5Ljk5OCwxNzguMzMyLDE3OC4zMzJzLTgwLjAwNywxNzguMzMyLTE3OC4zMzIsMTc4LjMzMkMxMDkuMzE4LDM4Ni4wNDcsMjkuMzMxLDMwNi4wNSwyOS4zMzEsMjA3LjcxNXoiIGZpbGw9IiMzNzQwNEQiLz48L3N2Zz4=) no-repeat left 9px center transparent;
+            background-size: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        input.search-text:focus {
+            z-index: 3;
+            width: 270px;
+            background-color: white;
+            border: 1px solid #161d6f;
+            outline: none;
+            cursor: auto;
+            padding-right: 30px;
+            margin-left: 10px;
+            margin-right: 5px;
+
+        }
+
+        input.search-submit {
+            position: relative;
+            z-index: 4;
+            top: 17px;
+            left: 49px;
+            width: 45px;
+            height: 45px;
+            border: 0;
+            outline: 0;
+            border-radius: 30px;
+            cursor: pointer;
+            background: none;
+        }
+
+        input.search-text::-webkit-search-cancel-button {
+            cursor: pointer;
+        }
+
+        .arrow {
+            font-size: 20px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #161d6f;
+            background-color: #161d6f;
+            color: white;
+            font: 100;
+            border-radius: 50%;
+        }
+
+        .accordion {
+            width: full;
+        }
+
+        .accordion .contentbx {
+            text-align: left;
+            position: relative;
+            margin: 10px 20px;
+        }
+
+        .accordion .contentbx .label {
+            position: relative;
+            padding: 10px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .accordion .contentbx .label::before {
+            content: '+';
+            position: absolute;
+            top: -10%;
+            right: 0px;
+            transform: translate(-50%);
+            padding: 10px;
+            margin-left: 10px;
+            font-size: 1.5rem;
+            display: inline-block;
+        }
+
+        .accordion .contentbx.active .label::before {
+            content: '+';
+            top: -10%;
+            right: 0px;
+            display: inline-block;
+        }
+
+        .accordion .contentbx .content {
+            position: relative;
+            background-color: #fff;
+            height: 0;
+            overflow: hidden;
+            transition: 0.5s;
+            overflow-y: auto;
+        }
+
+        .accordion .contentbx.active .content {
+            height: auto;
+            padding: 10px;
+        }
+
+        .overview-text {
+            margin-top: 5px;
+        }
+
+        .overview-text-header {
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .overview-text-subheader {
+            font-size: 13px;
+        }
+
+        .overview-text-item {
+            font-size: 12px;
+            position: relative;
+            display: flex;
+        }
+
+        .overview-text-item+.overview-text-item {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .overview-text-item:before {
+            content: "";
+            border: 2px solid #61bcff;
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            margin: 5px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .box {
+            display: block;
+            margin-bottom: 1em;
+        }
+
+        .fade-in {
+            height: 150px;
+            width: 1px;
+            opacity: 0;
+            transition: all .75s ease;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            height: 150px;
+            width: 100%;
+        }
+        .box1 {
+            display: block;
+            margin-bottom: 1em;
+        }
+
+        .fade-in1 {
+            height: 150px;
+            width: 1px;
+            opacity: 0;
+            transition: all .75s ease;
+        }
+
+        .fade-in1.show {
+            opacity: 1;
+            height: 150px;
+        }
+        .plus{
+            font-size: 20px;
+            color: #fff;
+            padding: 10px;
+            border: 1px solid #161d6f;
+            background-color: #161d6f;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+
+<body class="bg-partialwhite">
+
+    <!-- header -->
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 border-b-2 border-gray-100 shadow-xl z-10"
+        data-aos="fade-down">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl px-4 py-2 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="px-4 py-2 flex flex-row items-center justify-evenly">
+                <img src="../logo_dark.png" alt="" class="w-28 h-8">
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{'flex': open, 'hidden': !open}"
+                class="flex-col text-center flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:shadow-outline hover:bg-lightgreen focus:bg-lightgreen"
+                    href="../">Job Application</a>
+                <a class="text-left px-4 py-2 mt-2 text-sm font-semibold rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hfocus:outline-none focus:shadow-outline bg-lightgreen  hover:bg-lightgreen focus:bg-lightgreen"
+                    href="">My Post</a>
+                <div @click.away="open = false" class="relative z-10 " x-data="{ open: false }">
+                    <button @click="open = !open"
+                        class=" flex flex-row items-center w-full px-2 py-2 mt-2 h- 1 text-sm font-semibold text-center bg-transparent rounded-3xl dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 focus:bg-lightgreen focus:outline-none focus:shadow-outline hover:bg-lightgreen">
+                        <span>
+                            <svg width="25" height="25" viewBox="0 0 35 35" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                    fill="#161D6F" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute -left-14 right-0 w-72 mt-2 origin-center rounded-md shadow-lg md:w-48">
+                        <div class="px-2 py-2 bg-white rounded-md shadow">
+                            <div @click.away="open = false" class="relative" x-data="{ open: false } ">
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 35 35" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M17.354 21.0833C26.8461 21.0833 34.5415 24.6744 34.5415 29.1042V34.8333H0.166504V29.1042C0.166504 24.6744 7.86192 21.0833 17.354 21.0833ZM32.2498 29.1042C32.2498 25.9417 25.5811 23.375 17.354 23.375C9.12692 23.375 2.45817 25.9417 2.45817 29.1042V32.5417H32.2498V29.1042ZM17.354 0.458344C19.4813 0.458344 21.5214 1.30339 23.0256 2.80759C24.5298 4.31179 25.3748 6.35192 25.3748 8.47918C25.3748 10.6064 24.5298 12.6466 23.0256 14.1508C21.5214 15.655 19.4813 16.5 17.354 16.5C15.2267 16.5 13.1866 15.655 11.6824 14.1508C10.1782 12.6466 9.33317 10.6064 9.33317 8.47918C9.33317 6.35192 10.1782 4.31179 11.6824 2.80759C13.1866 1.30339 15.2267 0.458344 17.354 0.458344ZM17.354 2.75001C15.8345 2.75001 14.3773 3.35362 13.3029 4.42804C12.2284 5.50247 11.6248 6.95971 11.6248 8.47918C11.6248 9.99865 12.2284 11.4559 13.3029 12.5303C14.3773 13.6047 15.8345 14.2083 17.354 14.2083C18.8735 14.2083 20.3307 13.6047 21.4051 12.5303C22.4796 11.4559 23.0832 9.99865 23.0832 8.47918C23.0832 6.95971 22.4796 5.50247 21.4051 4.42804C20.3307 3.35362 18.8735 2.75001 17.354 2.75001Z"
+                                                fill="#161D6F" />
+                                        </svg>
+                                    </span>
+                                    <a href="profile"><span class="text-xs">Profile</span></a>
+                                </button>
+                                <button @click="open = !open" class="tech-inner-btn">
+                                    <span>
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="inline mt-1 mr-2 transition-transform duration-200 transform md:-mt-1">
+                                            <path
+                                                d="M5 3H11C11.7956 3 12.5587 3.31607 13.1213 3.87868C13.6839 4.44129 14 5.20435 14 6V10H13V6C13 5.46957 12.7893 4.96086 12.4142 4.58579C12.0391 4.21071 11.5304 4 11 4H5C4.46957 4 3.96086 4.21071 3.58579 4.58579C3.21071 4.96086 3 5.46957 3 6V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H11C11.5304 21 12.0391 20.7893 12.4142 20.4142C12.7893 20.0391 13 19.5304 13 19V15H14V19C14 19.7956 13.6839 20.5587 13.1213 21.1213C12.5587 21.6839 11.7956 22 11 22H5C4.20435 22 3.44129 21.6839 2.87868 21.1213C2.31607 20.5587 2 19.7956 2 19V6C2 5.20435 2.31607 4.44129 2.87868 3.87868C3.44129 3.31607 4.20435 3 5 3ZM8 12H19.25L16 8.75L16.664 8L21.164 12.5L16.664 17L16 16.25L19.25 13H8V12Z"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <a href="logout"><span class="text-xs">Sign Out</span></a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- content -->
+    <div class="w-full flex flex-row">
+        <div class="slide1 w-auto h-screen">
+            <form action="" role="search" class="search-form">
+                <div>
+                    <input type="submit" value="" class="search-submit">
+                    <input type="search" name="search" class="search-text -mt-36" placeholder="Search..." autocomplete="off">
+                </div>
+                <div class="box1 fade-in1 flex flex-col p-1 m-1">
+                    <span class="w-24 text-center p-1 border-2 border-midnight rounded text-xs">By Name</span>
+                    <span class="w-24 text-center p-1 border-2 border-midnight rounded mt-2 text-xs">By Date</span>
+                    <span class="w-32 text-center p-1 border-2 border-midnight rounded mt-2 text-xs">By Applicants</span>
+                </div>
+            </form>
+        </div>
+        <div class="flex flex-grow flex-row w-[12000px] h-screen ml-10">
+            <!-- 1st column -->
+            <div class="w-3/6">
+                <div class="accordion">
+
+                    <%
+                    jobpostData.forEach(callFunction)
+                        
+                    function callFunction(item) {            
+
+                    %>
+
+                    <div class="contentbx">
+                        <div class="label"><span class="text-lg font-medium"><%= item.postTitle %></span><br> <button
+                                class="slide px-4 mt-3 border-2 border-midnight rounded bg-lightgreen text-xs">Applications</button>
+                        </div>
+                        <div class="content">
+                            <div
+                                class="flex flex-row justify-around text-left border-2 border-gray-300 mx-2 my-2 -mt-1 rounded">
+                                <span class="border-r-2 border-gray-300 p-1"><span
+                                        class="text-xs text-gray-400">Experience</span>
+                                    <span class="block text-sm text-black font-medium"><%= item.experience %></span>
+                                </span>
+                                <span class="border-r-2 border-gray-300 p-1"><span
+                                        class="text-xs text-gray-400">Employment
+                                        Type</span>
+                                    <span class="block text-sm text-black font-medium">
+                                        <% 
+                                            if(item.jobType == 'parttime') {
+                                                %>
+                                                Part time
+                                                <%
+                                            } 
+                                            else{
+                                                %>
+                                                Full time
+                                                <%
+                                            } 
+                                        %>
+                                    </span>
+                                </span>
+                                <span class="border-r-2 border-gray-300 p-1"><span
+                                        class="text-xs text-gray-400">Vaccancies</span>
+                                    <span class="block text-sm text-black font-medium">
+                                        <%= item.vaccancy %>
+                                    </span>
+                                </span>
+                                <span class="border-r-2 border-gray-300 p-1"><span class="text-xs text-gray-400">Start
+                                        date</span>
+                                    <span class="block text-sm text-black font-medium">
+                                        <%
+                                        var d = item.startDate
+                                        var sd = d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear()
+                                        %><%= sd %>
+                                    </span>
+                                </span>
+                                <span class="p-1"><span class="text-xs text-gray-400">End date</span>
+                                    <span class="block text-sm text-black font-medium">
+                                        <%
+                                        var d = item.endDate
+                                        var ed = d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear()
+                                        %><%= ed %>
+                                    </span>
+                                </span>
+                            </div>
+                            <span class="text-sm mt-2 text-left px-3 ">Key Skills:</span>
+                            <div class="flex flex-row mt-1 text-xs flex-wrap p-1">
+                                <%
+                                var technologies = item.technologies
+                                technologies.forEach(callFunction2)
+        
+                                function callFunction2(tech) { 
+                                %>
+                                    <div class="border-solid border-2 border-gray-300 rounded py-1 px-6 mt-1 mr-1 ml-1 font-medium"> <%= tech %> </div>
+                                <%
+                                }
+                                %>
+                            </div>
+                            <div class="overview-text">
+                                <div class="overview-text-header px-3">Job Description</div>
+                                <div class="overview-text-item px-3"><%= item.description %></div>
+                                
+                            </div>
+                            <%
+                            var count = 0;
+                            var itemId = item._id
+                            applyonPostData.forEach(callFunction3)
+        
+                            function callFunction3(application) { 
+                                var appId = application.postId
+                                if(itemId.toString() == appId.toString()) {
+                                    count = count + 1;
+                                }
+                            }
+                            %>
+                            <span class="text-sm mt-5">Total Applicants: <%= count %></span>
+                        </div>
+                    </div>
+
+                    <%
+                    }   
+                    %>
+
+                </div>
+            </div>
+
+            <!-- 2nd column -->
+
+            
+        </div>
+    </div>
+    <div class="-mt-[130px] flex flex-row justify-end">
+        <span class="hidden">hello</span>
+        <a href="createPost"><i class="plus mr-10 fa fa-plus" aria-hidden="true" title="create post"></i></a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        const accordion = document.getElementsByClassName('contentbx');
+
+        for (i = 0; i < accordion.length; i++) {
+            accordion[i].addEventListener('click', function () {
+                this.classList.toggle('active');
+
+            })
+        }
+
+        $('.slide').on('click', function () {
+            $('.fade-in').toggleClass('show');
+        });
+
+        $('.spin').on('click', function () {
+            $('#spin-in').toggleClass('show2');
+        });
+
+        $('h1.spacing').on('mouseenter', function () {
+            $(this).toggleClass('spaced');
+        });
+
+        $('.slide1').on('click', function () {
+            $('.fade-in1').toggleClass('show');
+        });
+
+        $('.spin').on('click', function () {
+            $('#spin-in').toggleClass('show2');
+        });
+
+        $('h1.spacing').on('mouseenter', function () {
+            $(this).toggleClass('spaced');
+        });
+
+    </script>
+
+    
+<%- include("../components/general/feedback.ejs") %>
+
+</body>
+
+</html>

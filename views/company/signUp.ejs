@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../components/headLinks.ejs'); %>
+        <title><%= title %></title>        
+    </head>
+
+    <body>
+
+        <% 
+            var error = error;
+            if(error !== undefined) {
+                %>
+                <h1 style="position: absolute; width:100%; background-color: crimson; color: white;"><%= error %></h1>
+                <%
+            }
+            var success = success;
+            if(success !== undefined) {
+                %>
+                <h1 style="position: absolute; width:100%; color: black; background-color: springgreen;"><%= success %> <a href="/login">Login</a> </h1>
+                <%
+            }
+        %>
+
+        <form action="signUp" method="post">
+            <div class="bg-partialwhite min-h-screen flex flex-col">
+                <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                        <h1 class="mb-8 text-3xl text-center bg-white text-midnight">Sign up <span class="flex justify-center text-xs mt-3">As Company</span></h1>
+                        <input 
+                            type="text"
+                            class="block border border-grey-light w-full p-3 rounded mb-4 focus:outline-lightgray"
+                            name="name"
+                            placeholder="Name" />
+    
+                        <input 
+                            type="text"
+                            class="block border border-grey-light w-full p-3 rounded mb-4 focus:outline-lightgray"
+                            name="email"
+                            placeholder="Email" />
+    
+                        <input 
+                            type="password"
+                            class="block border border-grey-light w-full p-3 rounded mb-4 focus:outline-lightgray"
+                            name="password"
+                            placeholder="Password" />
+    
+                            <div class="flex items-start mb-6">
+                                <div class="flex items-center h-5">
+                                  <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label for="terms" class="font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
+                                </div>
+                              </div>
+
+                              <p id="error" style="display: none;">Please accept terms and conditions</p>
+                
+                        <button type="submit" class="w-full text-center py-3 text-sm font-semibold bg-midnight dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:text-gray-200  text-white border-solid border-2 border-midnight hover:border-midnight hover:bg-lightgreen hover:text-black rounded hover:shadow-xl transition ease-in-out delay-150 duration-200 focus:outline-none">Create Account</button>
+    
+                        <div class="text-center text-sm text-grey-dark mt-4">
+                            By signing up, you agree to the 
+                            <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                                Terms of Service
+                            </a> and 
+                            <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                                Privacy Policy
+                            </a>
+                        </div>
+                    </div>
+    
+                    <div class="text-grey-dark mt-6">
+                        Already have an account? 
+                        <a class="no-underline border-b border-blue text-blue" href="/login">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>  
+
+        <script>
+ 
+        </script>
+
+    </body>
+
+</html>

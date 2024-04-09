@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../components/headLinks.ejs'); %>
+
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <linkrel="stylesheet" href="https://unpkg.com/tailwindcss-colors-css-variables" />
+    <script src="tailwind.config.js">
+    </script>
+    <link href="/public/styles/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+        body {
+            background: #eee;
+            font-family: "Montserrat", sans-serif;
+            color: #3a3a3a;
+            text-align: center;
+            margin: 0;
+        }
+
+        .main-demo {
+            margin-bottom: 420px;
+        }
+
+        .main-demo .pen-title {
+            color: #757575;
+            margin: 50px;
+            font-weight: bolder;
+        }
+
+        /* Plan */
+        .plan {
+            display: inline-block;
+            position: relative;
+        }
+
+        .plan .card-box {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            display: inline-block;
+            text-align: center;
+            margin: 25px;
+        }
+
+        .plan .card-box .duration {
+            color: #00bab8;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        .plan .card-box .price {
+            font-size: 3em;
+            margin: 15px 0px;
+            min-width: 200px;
+        }
+
+        .plan .card-box .trap {
+            color: #757575;
+            font-size: 0.85em;
+        }
+
+        /* Cleaning css...*/
+        button {
+            background: #00bab8;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin: 20px;
+            padding: 10px 20px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.25em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        a:active {
+            background: #009493;
+        }
+
+        a.outline {
+            color: #00bab8;
+            border: 3px solid #00bab8;
+            padding: 7px;
+            margin: 0 10px !important;
+            background: transparent;
+        }
+
+        a.submit {
+            margin: 0 auto 20px auto;
+            padding: 10px;
+            width: 285px;
+        }
+
+        /* modal */
+        .modal {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+            margin-top: 20px;
+            padding: 0;
+            position: absolute;
+            box-shadow: 0;
+            opacity: 0;
+            height: 0;
+            z-index: 999;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+        .modal.active {
+            opacity: 1;
+            height: auto;
+        }
+
+        .modal.left {
+            left: 25px;
+        }
+
+        .modal.left .arrow {
+            left: 20px;
+        }
+
+        .modal.right {
+            right: 25px;
+        }
+
+        .modal.right .arrow {
+            right: 20px;
+        }
+
+        .modal.active .arrow {
+            display: block;
+        }
+
+        .modal.active .modal-wrap {
+            height: auto;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: -15px;
+            display: none;
+        }
+
+        .modal .modal-wrap {
+            overflow: hidden;
+            width: 500px;
+            white-space: nowrap;
+            height: 0;
+        }
+
+        .modal .slider {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0;
+            width: 1000px;
+            transition: transform 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .modal .slider section {
+            width: 500px;
+            height: 0;
+            overflow: hidden;
+            display: inline-block;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            transform: scale(0.85);
+            transition: all 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition-property: opacity, transform;
+        }
+
+        .modal .slider section.active {
+            height: 100%;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal .slider h1 {
+            margin: 20px 0;
+        }
+
+        .fake-buttons {
+            cursor: pointer;
+            background: #eee;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* login */
+        #login form {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        #login form input {
+            padding: 10px 10px;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 260px;
+            background: #efefef;
+            transition: all 0.2s ease-in;
+        }
+
+        #login form input:focus {
+            outline: none;
+            border-color: #161d6f !important;
+            box-shadow: 0 0 5px #161d6f;
+            background: #fff;
+        }
+
+        #login form .dual {
+            margin: 20px auto;
+        }
+
+        #login form .dual input {
+            display: inline-block;
+            width: 120px;
+            margin: 0;
+            vertical-align: middle;
+        }
+
+        #login form .dual input.left {
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        #login form .dual input.right {
+            display: inline-block;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-radius: 0px 5px 5px 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main-demo">
+
+        <div id="Monthly-plan" class="plan">
+            <div class="card-box">
+                <div class="price">$1.99</div>
+                <button class="btn bg-midnight text-sm" onclick="_toggle(this)">BUY NOW</button>
+                <div class="modal left active">
+                    <img class="arrow"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAPCAYAAAD6Ud/mAAAAdUlEQVQ4jbXNOw6AIBBFUeJaXINuj9XR8EoLeisKEnfwrEgM8QPjzO1vjnOCvPeT5BsqxrgA2EIIszVy5JwJYDfBKlJKIUmaYC1SU8WeEFXsC1HBepFfGIB1BBFhUmQI+4t0YVrIK6aN3GJWSIu5lBKtkCt2AnvkMngpPYu3AAAAAElFTkSuQmCC">
+                    <div class="modal-wrap">
+                        <div class="slider">
+                            <section class="active">
+                                <h1>Payment method</h1>
+                                <img class="fake-buttons" onclick="_move(this, 2)"
+                                    src="https://www.sitewelder.com/art2012/credit-cards-logos.png" width="350">
+                            </section>
+                            <section id="login">
+                                <form action="premiumPackage" method="post">
+                                    <input type="hidden" name="postid" />
+                                    <div class="dual">
+                                        <input type="text" placeholder="Card Number" class="left" name="cardNumber">
+                                        <input type="text" placeholder="Full Name" class="right" name="fullName">
+                                    </div>
+                                    <div class="dual">
+                                        <input type="text" placeholder="MM/YY" class="left" name="date">
+                                        <input type="text" placeholder="CVC" class="right" name="cvc">
+                                    </div>
+                                    <button type="submit" class="px-4 border-2 border-midnight rounded bg-lightgreen text-xs shadow-2xl" type="submit">Edit</button>
+                                </form>
+                                
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        /* No Jquery*/
+        const _ = {};
+        _.find = (a) => document.querySelectorAll(a);
+        _.slice = (a) => [].slice.call(a);
+        _.each = (a, b) => [].forEach.call(a, b);
+        _.hide = (a) => a.classList.remove("active");
+        _.show = (a) => a.classList.add("active");
+        _.has = (a, b) => a.classList.contains(b);
+        _.toggle = (a, b) => a.classList.toggle(b);
+
+        //Make generic slider
+        function _sliderMoveTo(opts) {
+            let items = opts.element.querySelectorAll("section"),
+                n = opts.item - 1;
+            //Reset class
+            _.each(items, (i) => (i.className = ""));
+            //Select active
+            items[n].className = "active";
+            opts.element.style.transform = "translate(" + -n * opts.width + "px, 0)";
+        }
+
+        //Move panel
+        function _move(e, n) {
+            let slider = e.parentNode.parentNode;
+            _sliderMoveTo({
+                element: slider,
+                width: 500,
+                item: n
+            });
+        }
+
+        function _toggle(e) {
+            const modal = e.parentNode.querySelector(".modal"),
+                m = _.slice(_.find(".modal")),
+                s = modal.querySelector(".slider");
+
+            if (!_.has(modal, "active")) {
+                //scroll to bottom
+                window.scrollTo(0, document.body.scrollHeight);
+
+                //Hide all modals
+                _.each(m, (i) => _.hide(i));
+            }
+
+            //Reset slider
+            _sliderMoveTo({
+                element: s,
+                width: 500,
+                item: 1
+            });
+
+            //toggle modal class
+            _.toggle(modal, "active");
+        }
+    </script>
+
+</body>
+
+</html>

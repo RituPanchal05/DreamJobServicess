@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+@layer components {
+    .btn-primary {
+        @apply focus:outline-none hover:bg-lightgreen hover:text-black rounded-lg text-midnight border-solid border-b-4 border-2 border-midnight hover:shadow-2xl;
+    }
+    .tech-inner-btn {
+        @apply flex flex-row text-left w-full px-4 py-2  text-xs font-semibold bg-transparent rounded-lg  md:inline md:mt-0 text-gray-600 hover:bg-lightgreen focus:bg-lightgreen focus:outline-none;
+    }
+    .tech-inner-inner-btn {
+        @apply block px-4 py-2 mt-2 text-xs text-left font-semibold bg-transparent rounded-lg md:mt-0 hover:bg-lightgreen focus:bg-lightgreen focus:outline-none;
+    }
+}
